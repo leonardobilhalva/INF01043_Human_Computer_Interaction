@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B33C4C342B5DD2160042F914 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33C4C332B5DD2160042F914 /* Notification.swift */; };
+		B33C4C362B5DDD1C0042F914 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33C4C352B5DDD1C0042F914 /* AppDelegate.swift */; };
 		B390B4272B34698A00EA0A1C /* Monitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B390B4262B34698A00EA0A1C /* Monitor.swift */; };
 		B3D190102B3463A0009610FA /* ReliefApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D1900F2B3463A0009610FA /* ReliefApp.swift */; };
 		B3D190142B3463A1009610FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3D190132B3463A1009610FA /* Assets.xcassets */; };
@@ -40,6 +41,7 @@
 
 /* Begin PBXFileReference section */
 		B33C4C332B5DD2160042F914 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		B33C4C352B5DDD1C0042F914 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B390B4262B34698A00EA0A1C /* Monitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monitor.swift; sourceTree = "<group>"; };
 		B3D1900C2B3463A0009610FA /* Relief.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Relief.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3D1900F2B3463A0009610FA /* ReliefApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReliefApp.swift; sourceTree = "<group>"; };
@@ -112,9 +114,9 @@
 				B3EF81C12B4CBB4E007C1B71 /* Settings */,
 				B3D190132B3463A1009610FA /* Assets.xcassets */,
 				B3EF81C02B4CBB1B007C1B71 /* Core */,
-				B3EF81BC2B4CBABF007C1B71 /* Login */,
 				B3EF81BD2B4CBACB007C1B71 /* Statistics */,
 				B3EF81C22B4CBB5F007C1B71 /* Forum */,
+				B3EF81BC2B4CBABF007C1B71 /* Login */,
 				B3D190152B3463A1009610FA /* Preview Content */,
 			);
 			path = Relief;
@@ -164,6 +166,7 @@
 		B3EF81C02B4CBB1B007C1B71 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				B33C4C352B5DDD1C0042F914 /* AppDelegate.swift */,
 				B390B4262B34698A00EA0A1C /* Monitor.swift */,
 				B33C4C332B5DD2160042F914 /* Notification.swift */,
 			);
@@ -322,6 +325,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B33C4C362B5DDD1C0042F914 /* AppDelegate.swift in Sources */,
 				B3EF81BF2B4CBB0E007C1B71 /* HomeView.swift in Sources */,
 				B3EF81CD2B4CDFA8007C1B71 /* SignUpView.swift in Sources */,
 				B390B4272B34698A00EA0A1C /* Monitor.swift in Sources */,
