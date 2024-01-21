@@ -19,10 +19,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        return true
    }
 }
-
-
-struct MonitorView: View {
-    var body: some View {
-        Text("texte")
-    }
-}

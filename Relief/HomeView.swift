@@ -5,9 +5,8 @@ struct HomeView: View {
     @State private var navigateToSettings = false
     @State private var navigateToStatistics = false
     @State private var navigateToForum = false
-    @State private var programaIniciado = false
-    @StateObject private var timerManager = TimerManager()
-    
+    @StateObject private var timerManager = NotificationManager()
+
     var body: some View {
         NavigationView {
             VStack {
@@ -24,7 +23,6 @@ struct HomeView: View {
                     } else {
                         self.timerManager.startTimer()
                     }
-                    self.timerManager.programaIniciado.toggle()
                 }) {
                     Text(timerManager.programaIniciado ? "Parar App" : "Iniciar App")
                         .frame(width: 140, height: 140)
@@ -37,7 +35,6 @@ struct HomeView: View {
                         .padding()
                 }
 
-                
                 Button("Configurações") {
                     self.navigateToSettings = true
                 }
@@ -46,8 +43,8 @@ struct HomeView: View {
                 .foregroundColor(.white)
                 .cornerRadius(10)
                 .padding(.horizontal)
-                .background(NavigationLink(destination: SettingsView(), isActive: $navigateToSettings) { EmptyView() })
-                
+                .background(NavigationLink(destination: SettingsView().environmentObject(timerManager), isActive: $navigateToSettings) { EmptyView() })
+
                 Button("Estatísticas") {
                     self.navigateToStatistics = true
                 }
@@ -56,7 +53,7 @@ struct HomeView: View {
                 .foregroundColor(.white)
                 .cornerRadius(10)
                 .padding(.horizontal)
-                .background(NavigationLink(destination: StatisticsView(), isActive: $navigateToStatistics) { EmptyView() })
+                .background(NavigationLink(destination: StatisticsView().environmentObject(timerManager), isActive: $navigateToStatistics) { EmptyView() })
                 
                 Button("Fórum") {
                     self.navigateToForum = true
@@ -66,7 +63,7 @@ struct HomeView: View {
                 .foregroundColor(.white)
                 .cornerRadius(10)
                 .padding(.horizontal)
-                .background(NavigationLink(destination: ForumView(), isActive: $navigateToForum) { EmptyView() })
+                .background(NavigationLink(destination: ForumView().environmentObject(timerManager), isActive: $navigateToForum) { EmptyView() })
                 
                 Spacer()
             }
@@ -75,30 +72,34 @@ struct HomeView: View {
             .edgesIgnoringSafeArea(.all)
         }
         .onAppear {
-            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { _, _ in }
+            self.timerManager.requestAuthorization()
         }
     }
-
 }
 
-
 struct SettingsView: View {
-    var body: some View {
-        Text("Settings View")        .navigationBarBackButtonHidden(true)
+    @EnvironmentObject var timerManager: NotificationManager
 
+    var body: some View {
+        Text("Settings View")
+            .navigationBarBackButtonHidden(true)
     }
 }
 
 struct StatisticsView: View {
-    var body: some View {
-        Text("Statistics View")        .navigationBarBackButtonHidden(true)
+    @EnvironmentObject var timerManager: NotificationManager
 
+    var body: some View {
+        Text("Statistics View")
+            .navigationBarBackButtonHidden(true)
     }
 }
 
 struct ForumView: View {
-    var body: some View {
-        Text("Forum View")        .navigationBarBackButtonHidden(true)
+    @EnvironmentObject var timerManager: NotificationManager
 
+    var body: some View {
+        Text("Forum View")
+            .navigationBarBackButtonHidden(true)
     }
 }

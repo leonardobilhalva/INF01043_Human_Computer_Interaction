@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B390B4272B34698A00EA0A1C /* MonitorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B390B4262B34698A00EA0A1C /* MonitorView.swift */; };
+		B33C4C342B5DD2160042F914 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33C4C332B5DD2160042F914 /* Notification.swift */; };
+		B390B4272B34698A00EA0A1C /* Monitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B390B4262B34698A00EA0A1C /* Monitor.swift */; };
 		B3D190102B3463A0009610FA /* ReliefApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D1900F2B3463A0009610FA /* ReliefApp.swift */; };
 		B3D190142B3463A1009610FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3D190132B3463A1009610FA /* Assets.xcassets */; };
 		B3D190172B3463A1009610FA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3D190162B3463A1009610FA /* Preview Assets.xcassets */; };
@@ -38,7 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		B390B4262B34698A00EA0A1C /* MonitorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorView.swift; sourceTree = "<group>"; };
+		B33C4C332B5DD2160042F914 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		B390B4262B34698A00EA0A1C /* Monitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monitor.swift; sourceTree = "<group>"; };
 		B3D1900C2B3463A0009610FA /* Relief.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Relief.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3D1900F2B3463A0009610FA /* ReliefApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReliefApp.swift; sourceTree = "<group>"; };
 		B3D190132B3463A1009610FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -103,14 +105,13 @@
 		B3D1900E2B3463A0009610FA /* Relief */ = {
 			isa = PBXGroup;
 			children = (
-				B3E63E5E2B4D0ACB0014C6E7 /* New Group */,
 				B3E63E5D2B4D030B0014C6E7 /* Info.plist */,
 				B3EF81C52B4CBD5A007C1B71 /* ImageAssets */,
 				B3D1900F2B3463A0009610FA /* ReliefApp.swift */,
 				B3EF81BE2B4CBB0E007C1B71 /* HomeView.swift */,
 				B3EF81C12B4CBB4E007C1B71 /* Settings */,
 				B3D190132B3463A1009610FA /* Assets.xcassets */,
-				B3EF81C02B4CBB1B007C1B71 /* Monitoring */,
+				B3EF81C02B4CBB1B007C1B71 /* Core */,
 				B3EF81BC2B4CBABF007C1B71 /* Login */,
 				B3EF81BD2B4CBACB007C1B71 /* Statistics */,
 				B3EF81C22B4CBB5F007C1B71 /* Forum */,
@@ -144,13 +145,6 @@
 			path = ReliefUITests;
 			sourceTree = "<group>";
 		};
-		B3E63E5E2B4D0ACB0014C6E7 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
-			sourceTree = "<group>";
-		};
 		B3EF81BC2B4CBABF007C1B71 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -167,12 +161,13 @@
 			path = Statistics;
 			sourceTree = "<group>";
 		};
-		B3EF81C02B4CBB1B007C1B71 /* Monitoring */ = {
+		B3EF81C02B4CBB1B007C1B71 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				B390B4262B34698A00EA0A1C /* MonitorView.swift */,
+				B390B4262B34698A00EA0A1C /* Monitor.swift */,
+				B33C4C332B5DD2160042F914 /* Notification.swift */,
 			);
-			path = Monitoring;
+			path = Core;
 			sourceTree = "<group>";
 		};
 		B3EF81C12B4CBB4E007C1B71 /* Settings */ = {
@@ -329,7 +324,8 @@
 			files = (
 				B3EF81BF2B4CBB0E007C1B71 /* HomeView.swift in Sources */,
 				B3EF81CD2B4CDFA8007C1B71 /* SignUpView.swift in Sources */,
-				B390B4272B34698A00EA0A1C /* MonitorView.swift in Sources */,
+				B390B4272B34698A00EA0A1C /* Monitor.swift in Sources */,
+				B33C4C342B5DD2160042F914 /* Notification.swift in Sources */,
 				B3E63E602B4D0AF90014C6E7 /* SettingsView.swift in Sources */,
 				B3EF81CB2B4CDEDA007C1B71 /* LoginView.swift in Sources */,
 				B3D190102B3463A0009610FA /* ReliefApp.swift in Sources */,
