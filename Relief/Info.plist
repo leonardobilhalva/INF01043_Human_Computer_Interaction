@@ -2,15 +2,24 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>bluetooth-central</string>
-		<string>bluetooth-peripheral</string>
-		<string>external-accessory</string>
-		<string>fetch</string>
-		<string>nearby-interaction</string>
-		<string>processing</string>
-		<string>remote-notification</string>
-	</array>
+    <key>UIBackgroundModes</key>
+    <array>
+        <string>bluetooth-central</string>
+        <string>bluetooth-peripheral</string>
+        <string>external-accessory</string>
+        <string>fetch</string>
+        <string>nearby-interaction</string>
+        <string>processing</string>
+        <string>remote-notification</string>
+    </array>
+    <key>NSDeviceActivityMonitoringUsageDescription</key>
+    <string>Monitor o tempo de uso de outros apps para Relief.</string>
+	<key>NSExtension</key>
+	<dict>
+		<key>NSExtensionPointIdentifier</key>
+		<string>com.apple.deviceactivity.monitor-extension</string>
+		<key>NSExtensionPrincipalClass</key>
+		<string>$(PRODUCT_MODULE_NAME).DeviceActivityMonitorExtension</string>
+	</dict>
 </dict>
 </plist>

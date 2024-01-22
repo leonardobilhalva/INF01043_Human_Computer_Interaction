@@ -46,7 +46,7 @@ class NotificationManager: ObservableObject {
 
             print("Timer disparado, agendando notificação")
 
-            self.timerInterval += 5
+            self.timerInterval += 0
             self.scheduleNotification(title: "Momento Relief", body: "Hora de voltar ao foco!", interval: self.timerInterval)
             self.scheduleTimer()
         }

@@ -8,9 +8,12 @@
 import Foundation
 import UIKit
 import UserNotifications
+import DeviceActivity
 
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
-
+    var window: UIWindow?
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
     UNUserNotificationCenter.current().delegate = self
@@ -28,6 +31,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             print("Notificação pendente: \(request.identifier) - \(request.trigger)")
         }
     }
+        window = UIWindow()
+           window?.rootViewController = ViewController()
+           window?.makeKeyAndVisible()
         
        return true
    }

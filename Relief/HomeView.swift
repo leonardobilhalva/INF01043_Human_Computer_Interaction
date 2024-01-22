@@ -1,5 +1,7 @@
 import SwiftUI
 import UserNotifications
+import FamilyControls
+
 
 struct HomeView: View {
     @State private var navigateToSettings = false
@@ -19,9 +21,9 @@ struct HomeView: View {
                 
                 Button(action: {
                     if self.timerManager.programaIniciado {
-                        self.timerManager.stopTimer()
+//                        self.timerManager.stopTimer()
                     } else {
-                        self.timerManager.startTimer()
+//                        self.timerManager.startTimer()
                     }
                 }) {
                     Text(timerManager.programaIniciado ? "Parar App" : "Iniciar App")
@@ -45,6 +47,16 @@ struct HomeView: View {
                 .padding(.horizontal)
                 .background(NavigationLink(destination: SettingsView().environmentObject(timerManager), isActive: $navigateToSettings) { EmptyView() })
 
+                Button("Teste") {
+                                  self.navigateToSettings = true
+                              }
+                              .frame(minWidth: 0, maxWidth: .infinity, minHeight: 44)
+                              .background(Color.blue)
+                              .foregroundColor(.white)
+                              .cornerRadius(10)
+                              .padding(.horizontal)
+                              .background(NavigationLink(destination: ViewControllerWrapper(), isActive: $navigateToSettings) { EmptyView() })
+                
                 Button("Estatísticas") {
                     self.navigateToStatistics = true
                 }
@@ -73,9 +85,31 @@ struct HomeView: View {
         }
         .onAppear {
             self.timerManager.requestAuthorization()
+            
+            let ac = AuthorizationCenter.shared
+
+            Task {
+                do {
+                    try await ac.requestAuthorization(for: .individual)
+                }
+                catch {
+                    // Some error occurred
+                }
+            }
+            
         }
     }
 }
+
+struct ViewControllerWrapper: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> ViewController {
+        ViewController()
+    }
+    
+    func updateUIViewController(_ uiViewController: ViewController, context: Context) {
+    }
+}
+
 
 struct SettingsView: View {
     @EnvironmentObject var timerManager: NotificationManager
