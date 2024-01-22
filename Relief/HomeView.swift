@@ -8,6 +8,12 @@ struct HomeView: View {
     @State private var navigateToStatistics = false
     @State private var navigateToForum = false
     @StateObject private var timerManager = NotificationManager()
+    @StateObject private var monitorManager = MonitorManager()
+    var viewController: ViewController?
+
+    
+    
+    @State private var isMonitoringActive = false
 
     var body: some View {
         NavigationView {
@@ -20,15 +26,11 @@ struct HomeView: View {
                     .frame(maxHeight: 250)
                 
                 Button(action: {
-                    if self.timerManager.programaIniciado {
-//                        self.timerManager.stopTimer()
-                    } else {
-//                        self.timerManager.startTimer()
-                    }
+                    monitorManager.toggleMonitoring()
                 }) {
-                    Text(timerManager.programaIniciado ? "Parar App" : "Iniciar App")
+                    Text(monitorManager.isMonitoringActive ? "Parar App" : "Iniciar App")
                         .frame(width: 140, height: 140)
-                        .background(timerManager.programaIniciado ? Color.red : Color.green)
+                        .background(monitorManager.isMonitoringActive ? Color.red : Color.green)
                         .foregroundColor(.white)
                         .font(.headline)
                         .clipShape(Circle())
@@ -37,45 +39,25 @@ struct HomeView: View {
                         .padding()
                 }
 
-                Button("Configurações") {
-                    self.navigateToSettings = true
-                }
-                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 44)
-                .background(Color.blue)
-                .foregroundColor(.white)
-                .cornerRadius(10)
-                .padding(.horizontal)
-                .background(NavigationLink(destination: SettingsView().environmentObject(timerManager), isActive: $navigateToSettings) { EmptyView() })
+                NavigationLink(destination: SettingsView().environmentObject(timerManager)) {
+                                    Text("Configurações")
+                                }
+                                .buttonStyle(MyButtonStyle())
 
-                Button("Teste") {
-                                  self.navigateToSettings = true
-                              }
-                              .frame(minWidth: 0, maxWidth: .infinity, minHeight: 44)
-                              .background(Color.blue)
-                              .foregroundColor(.white)
-                              .cornerRadius(10)
-                              .padding(.horizontal)
-                              .background(NavigationLink(destination: ViewControllerWrapper(), isActive: $navigateToSettings) { EmptyView() })
-                
-                Button("Estatísticas") {
-                    self.navigateToStatistics = true
-                }
-                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 44)
-                .background(Color.blue)
-                .foregroundColor(.white)
-                .cornerRadius(10)
-                .padding(.horizontal)
-                .background(NavigationLink(destination: StatisticsView().environmentObject(timerManager), isActive: $navigateToStatistics) { EmptyView() })
-                
-                Button("Fórum") {
-                    self.navigateToForum = true
-                }
-                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 44)
-                .background(Color.blue)
-                .foregroundColor(.white)
-                .cornerRadius(10)
-                .padding(.horizontal)
-                .background(NavigationLink(destination: ForumView().environmentObject(timerManager), isActive: $navigateToForum) { EmptyView() })
+                NavigationLink(destination: ViewControllerWrapper().environmentObject(monitorManager)) {
+                                    Text("Teste")
+                                }
+                                .buttonStyle(MyButtonStyle())
+
+                NavigationLink(destination: StatisticsView().environmentObject(timerManager)) {
+                                    Text("Estatísticas")
+                                }
+                                .buttonStyle(MyButtonStyle())
+
+                NavigationLink(destination: ForumView().environmentObject(timerManager)) {
+                                    Text("Fórum")
+                                }
+                                .buttonStyle(MyButtonStyle())
                 
                 Spacer()
             }
@@ -102,11 +84,26 @@ struct HomeView: View {
 }
 
 struct ViewControllerWrapper: UIViewControllerRepresentable {
+    @EnvironmentObject var monitorManager: MonitorManager
+
     func makeUIViewController(context: Context) -> ViewController {
-        ViewController()
+        let viewController = ViewController()
+        monitorManager.viewController = viewController
+        return viewController
     }
     
     func updateUIViewController(_ uiViewController: ViewController, context: Context) {
+    }
+}
+
+struct MyButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 44)
+            .background(Color.blue)
+            .foregroundColor(.white)
+            .cornerRadius(10)
+            .padding(.horizontal)
     }
 }
 

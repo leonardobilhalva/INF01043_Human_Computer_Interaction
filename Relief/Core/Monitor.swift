@@ -8,8 +8,9 @@ import Combine
 // Modelo para gerenciar a seleção de atividades da família
 class ScreenTimeSelectAppsModel: ObservableObject {
     @Published var activitySelection = FamilyActivitySelection()
+    @Published var isMonitoringActive = false
 
-    init() { }
+//    init() { }
 }
 
 // View SwiftUI para selecionar aplicativos
@@ -31,17 +32,62 @@ struct ScreenTimeSelectAppsContentView: View {
 }
 
 class ViewController: UIViewController {
+    private let model = ScreenTimeSelectAppsModel()
+    private var center = DeviceActivityCenter() // Instância de DeviceActivityCenter
     private var monitor: MyMonitorExtension?
     private var timer: Timer?
     private var lastRecordedTime: TimeInterval = 0
     private let checkInterval: TimeInterval = 10
-    private let model = ScreenTimeSelectAppsModel()
     private var cancellables = Set<AnyCancellable>()
-
+    var viewController: ViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         observeSelection()
+    }
+    
+    func startMonitoring() {
+        if !model.isMonitoringActive {
+            let activityName = DeviceActivityName("MyAppUsage")
+            let event = DeviceActivityEvent(
+                applications: model.activitySelection.applicationTokens,
+                categories: model.activitySelection.categoryTokens,
+                webDomains: model.activitySelection.webDomainTokens,
+                threshold: DateComponents(second: 10)
+            )
+
+            let schedule = DeviceActivitySchedule(
+                intervalStart: DateComponents(hour: 0, minute: 0),
+                intervalEnd: DateComponents(hour: 23, minute: 59),
+                repeats: true
+            )
+
+            do {
+                try center.startMonitoring(
+                    activityName,
+                    during: schedule,
+                    events: [DeviceActivityEvent.Name("UsageEvent"): event]
+                )
+                model.isMonitoringActive = true
+                monitor = MyMonitorExtension()
+            } catch {
+                print("Error starting monitoring: \(error)")
+            }
+        }
+    }
+
+    
+    func stopMonitoring() {
+        if model.isMonitoringActive {
+            let activityNames = [DeviceActivityName("MyAppUsage")]
+            do {
+                try center.stopMonitoring(activityNames)
+                model.isMonitoringActive = false
+            } catch {
+                print("Erro ao parar o monitoramento: \(error)")
+            }
+        }
     }
 
     func setupUI() {
@@ -62,7 +108,7 @@ class ViewController: UIViewController {
 
     func startMonitoring(selection: FamilyActivitySelection) {
         let center = DeviceActivityCenter()
-        let activity = DeviceActivityName("MyApp.Activity")
+        let activity = DeviceActivityName("Relief.Activity")
 
         let event = DeviceActivityEvent(
             applications: selection.applicationTokens,
@@ -81,7 +127,7 @@ class ViewController: UIViewController {
             try center.startMonitoring(
                 activity,
                 during: schedule,
-                events: [DeviceActivityEvent.Name("MyApp.Usage"): event]
+                events: [DeviceActivityEvent.Name("Relief.Usage"): event]
             )
 
             monitor = MyMonitorExtension()
@@ -91,7 +137,7 @@ class ViewController: UIViewController {
 
         startTimer()
     }
-
+    
     func startTimer() {
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(checkUsage), userInfo: nil, repeats: true)
     }
@@ -123,5 +169,30 @@ class MyMonitorExtension: DeviceActivityMonitor {
     override func eventWillReachThresholdWarning(_ event: DeviceActivityEvent.Name, activity: DeviceActivityName) {
         super.eventWillReachThresholdWarning(event, activity: activity)
         // Aqui você pode implementar um aviso para o usuário
+    }
+}
+
+extension ViewController: MyMonitorDelegate {
+    func didUseApp() {
+        print("O aplicativo foi utilizado por mais \(checkInterval) segundos.")
+    }
+}
+
+protocol MyMonitorDelegate: AnyObject {
+    func didUseApp()
+}
+
+
+class MonitorManager: ObservableObject {
+    @Published var isMonitoringActive = false
+    var viewController: ViewController?
+    
+    func toggleMonitoring() {
+        isMonitoringActive.toggle()
+        if isMonitoringActive {
+            viewController?.startMonitoring()
+        } else {
+            viewController?.stopMonitoring()
+        }
     }
 }
