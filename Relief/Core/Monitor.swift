@@ -34,12 +34,16 @@ class ViewController: UIViewController {
     private var monitor: MyMonitorExtension?
     private var cancellables = Set<AnyCancellable>()
     
+    private let userDefaultsKey = "ReliefAppsSelection"
+    private let encoder = PropertyListEncoder()
+    private let decoder = PropertyListDecoder()
+    
     
     init(notificationManager: NotificationManager) {
         self.notificationManager = notificationManager
         super.init(nibName: nil, bundle: nil)
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -53,26 +57,35 @@ class ViewController: UIViewController {
     func startMonitoring() {
         if !model.isMonitoringActive {
             print("Preparando para iniciar monitoramento...")
-            let activityName = DeviceActivityName("MyAppUsage")
-            let event = DeviceActivityEvent(
-                applications: model.activitySelection.applicationTokens,
-                categories: [],
-                webDomains: [],
-                threshold: DateComponents(second: 2)
-            )
-
+            
             let schedule = DeviceActivitySchedule(
                 intervalStart: DateComponents(hour: 0, minute: 0),
                 intervalEnd: DateComponents(hour: 23, minute: 59),
                 repeats: true
             )
+            let selection: FamilyActivitySelection = loadSelection() ?? FamilyActivitySelection()
+            let timeLimit = 5
+            let event = DeviceActivityEvent(
+                applications: selection.applicationTokens,
+                categories: selection.categoryTokens,
+                webDomains: selection.webDomainTokens,
+                threshold: DateComponents(second: timeLimit)
+            )
+            
+            let activity = DeviceActivityName("MyApp.ScreenTime")
+            let eventName = DeviceActivityEvent.Name("MyApp.SomeEventName")
+            let center = DeviceActivityCenter()
+            center.stopMonitoring()
 
             do {
                 try center.startMonitoring(
-                    activityName,
+                    activity,
                     during: schedule,
-                    events: [DeviceActivityEvent.Name("UsageEvent"): event]
+                    events: [
+                        eventName: event
+                    ]
                 )
+                
                 model.isMonitoringActive = true
                 monitor = MyMonitorExtension(notificationManager: notificationManager)
                 print("Monitoramento iniciado.")
@@ -85,7 +98,7 @@ class ViewController: UIViewController {
     func stopMonitoring() {
         if model.isMonitoringActive {
             print("Monitoramento parado.")
-            let activityNames = [DeviceActivityName("MyAppUsage")]
+            let activityNames = [DeviceActivityName("MyApp.ScreenTime")]
             do {
                 try center.stopMonitoring(activityNames)
                 model.isMonitoringActive = false
@@ -103,14 +116,39 @@ class ViewController: UIViewController {
         controller.view.frame = view.frame
         controller.didMove(toParent: self)
     }
-
-    func observeSelection() {
-        model.$activitySelection.sink { [weak self] selection in
-            print("Seleção atualizada: \(selection.applicationTokens)")
-        }
-        .store(in: &cancellables)
-    }
 }
+
+extension ViewController { // visualiza, salva e carrega
+    func observeSelection() {
+            model.activitySelection = loadSelection() ?? FamilyActivitySelection()
+
+              model.$activitySelection.sink { selection in
+                  print("Seleção atualizada: \(selection.applicationTokens)")
+                  self.saveSelection(selection: selection)
+              }
+              .store(in: &cancellables)
+        }
+    
+    func saveSelection(selection: FamilyActivitySelection) {
+            let defaults = UserDefaults.standard
+            defaults.set(
+                try? encoder.encode(selection),
+                forKey: userDefaultsKey
+            )
+        }
+
+    func loadSelection() -> FamilyActivitySelection? {
+           let defaults = UserDefaults.standard
+           guard let data = defaults.data(forKey: userDefaultsKey) else {
+               return nil
+           }
+            let decoder = PropertyListDecoder()
+            return try? decoder.decode(FamilyActivitySelection.self, from: data)
+       }
+}
+
+
+
 
 class MyMonitorExtension: DeviceActivityMonitor {
     let notificationManager: NotificationManager
@@ -119,7 +157,8 @@ class MyMonitorExtension: DeviceActivityMonitor {
         self.notificationManager = notificationManager
         super.init()
     }
-
+    
+    
     override func eventDidReachThreshold(_ event: DeviceActivityEvent.Name, activity: DeviceActivityName) {
         super.eventDidReachThreshold(event, activity: activity)
         notificationManager.sendImmediateNotification(title: "Atenção", body: "Limite de tempo atingido para \(activity)")
@@ -131,15 +170,15 @@ class MyMonitorExtension: DeviceActivityMonitor {
     }
 }
 
-extension ViewController: MyMonitorDelegate {
-    func didUseApp() {
-        print("O aplicativo foi utilizado por mais 10 segundos.")
-    }
-}
-
-protocol MyMonitorDelegate: AnyObject {
-    func didUseApp()
-}
+//extension ViewController: MyMonitorDelegate {
+//    func didUseApp() {
+//        print("O aplicativo foi utilizado por mais 10 segundos.")
+//    }
+//}
+//
+//protocol MyMonitorDelegate: AnyObject {
+//    func didUseApp()
+//}
 
 class MonitorManager: ObservableObject {
     @Published var isMonitoringActive = false
@@ -154,3 +193,5 @@ class MonitorManager: ObservableObject {
         }
     }
 }
+
+
