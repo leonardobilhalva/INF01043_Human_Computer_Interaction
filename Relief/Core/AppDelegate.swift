@@ -31,9 +31,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             print("Notificação pendente: \(request.identifier) - \(request.trigger)")
         }
     }
-        window = UIWindow()
-           window?.rootViewController = ViewController()
-           window?.makeKeyAndVisible()
+//        window = UIWindow()
+//       window?.rootViewController = ViewController()
+//       window?.makeKeyAndVisible()
         
        return true
    }

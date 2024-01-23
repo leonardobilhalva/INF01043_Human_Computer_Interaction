@@ -51,8 +51,23 @@ class NotificationManager: ObservableObject {
             self.scheduleTimer()
         }
     }
+    
+    func sendImmediateNotification(title: String, body: String) {
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.body = body
+        content.sound = .default
 
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil) // nil trigger para notificação imediata
 
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error = error {
+                print("Erro ao disparar notificação imediata: \(error.localizedDescription)")
+            } else {
+                print("Notificação imediata disparada com sucesso")
+            }
+        }
+    }
 
 
     private func scheduleNotification(title: String, body: String, interval: TimeInterval) {

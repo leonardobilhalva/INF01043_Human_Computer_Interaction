@@ -7,7 +7,7 @@ struct HomeView: View {
     @State private var navigateToSettings = false
     @State private var navigateToStatistics = false
     @State private var navigateToForum = false
-    @StateObject private var timerManager = NotificationManager()
+    @StateObject private var notificationManager = NotificationManager()
     @StateObject private var monitorManager = MonitorManager()
     var viewController: ViewController?
 
@@ -39,22 +39,22 @@ struct HomeView: View {
                         .padding()
                 }
 
-                NavigationLink(destination: SettingsView().environmentObject(timerManager)) {
+                NavigationLink(destination: SettingsView().environmentObject(notificationManager)) {
                                     Text("Configurações")
                                 }
                                 .buttonStyle(MyButtonStyle())
 
-                NavigationLink(destination: ViewControllerWrapper().environmentObject(monitorManager)) {
+                NavigationLink(destination: ViewControllerWrapper().environmentObject(monitorManager).environmentObject(notificationManager)) {
                                     Text("Teste")
                                 }
                                 .buttonStyle(MyButtonStyle())
 
-                NavigationLink(destination: StatisticsView().environmentObject(timerManager)) {
+                NavigationLink(destination: StatisticsView().environmentObject(notificationManager)) {
                                     Text("Estatísticas")
                                 }
                                 .buttonStyle(MyButtonStyle())
 
-                NavigationLink(destination: ForumView().environmentObject(timerManager)) {
+                NavigationLink(destination: ForumView().environmentObject(notificationManager)) {
                                     Text("Fórum")
                                 }
                                 .buttonStyle(MyButtonStyle())
@@ -66,7 +66,7 @@ struct HomeView: View {
             .edgesIgnoringSafeArea(.all)
         }
         .onAppear {
-            self.timerManager.requestAuthorization()
+            self.notificationManager.requestAuthorization()
             
             let ac = AuthorizationCenter.shared
 
@@ -85,13 +85,14 @@ struct HomeView: View {
 
 struct ViewControllerWrapper: UIViewControllerRepresentable {
     @EnvironmentObject var monitorManager: MonitorManager
+    @EnvironmentObject var notificationManager: NotificationManager
 
     func makeUIViewController(context: Context) -> ViewController {
-        let viewController = ViewController()
+        let viewController = ViewController(notificationManager: notificationManager)
         monitorManager.viewController = viewController
         return viewController
     }
-    
+
     func updateUIViewController(_ uiViewController: ViewController, context: Context) {
     }
 }
@@ -109,7 +110,7 @@ struct MyButtonStyle: ButtonStyle {
 
 
 struct SettingsView: View {
-    @EnvironmentObject var timerManager: NotificationManager
+    @EnvironmentObject var notificationManager: NotificationManager
 
     var body: some View {
         Text("Settings View")
@@ -118,7 +119,7 @@ struct SettingsView: View {
 }
 
 struct StatisticsView: View {
-    @EnvironmentObject var timerManager: NotificationManager
+    @EnvironmentObject var notificationManager: NotificationManager
 
     var body: some View {
         Text("Statistics View")
@@ -127,7 +128,7 @@ struct StatisticsView: View {
 }
 
 struct ForumView: View {
-    @EnvironmentObject var timerManager: NotificationManager
+    @EnvironmentObject var notificationManager: NotificationManager
 
     var body: some View {
         Text("Forum View")
