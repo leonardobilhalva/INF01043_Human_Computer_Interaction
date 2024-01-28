@@ -8,6 +8,8 @@ import Combine
 class ScreenTimeSelectAppsModel: ObservableObject {
     @Published var activitySelection = FamilyActivitySelection()
     @Published var isMonitoringActive = false
+    
+    init() { }
 }
 
 struct ScreenTimeSelectAppsContentView: View {
@@ -24,6 +26,9 @@ struct ScreenTimeSelectAppsContentView: View {
             isPresented: $pickerIsPresented,
             selection: $model.activitySelection
         )
+        .onDisappear(){
+            print("leonardo:  \($model.activitySelection.applicationTokens)")
+        }
     }
 }
 
@@ -31,7 +36,7 @@ class ViewController: UIViewController {
     var notificationManager: NotificationManager
     private let model = ScreenTimeSelectAppsModel()
     private var center = DeviceActivityCenter()
-    private var monitor: MyMonitorExtension?
+//    private var monitor: MyMonitorExtension?
     private var cancellables = Set<AnyCancellable>()
     
     private let userDefaultsKey = "ReliefAppsSelection"
@@ -51,29 +56,50 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        observeSelection()
+//        observeSelection()
     }
 
     func startMonitoring() {
         if !model.isMonitoringActive {
             print("Preparando para iniciar monitoramento...")
             
+            let atualDate = Date()
+            let calendar = Calendar.current
+            
             let schedule = DeviceActivitySchedule(
                 intervalStart: DateComponents(hour: 0, minute: 0),
                 intervalEnd: DateComponents(hour: 23, minute: 59),
                 repeats: true
+//                warningTime: DateComponents(second: 5)
             )
+            
+            let ac = AuthorizationCenter.shared
+            Task {
+                do {
+                    try await ac.requestAuthorization(for: .individual)
+                }
+                catch {
+                    print("Error getting auth for Family Controls")
+                }
+            }
+            
             let selection: FamilyActivitySelection = loadSelection() ?? FamilyActivitySelection()
-            let timeLimit = 5
+            print("selectioN: \(selection)")
+            
+            model.$activitySelection.sink { selection in
+                self.saveSelection(selection: selection)
+            }
+            .store(in: &cancellables)
+            
             let event = DeviceActivityEvent(
                 applications: selection.applicationTokens,
                 categories: selection.categoryTokens,
                 webDomains: selection.webDomainTokens,
-                threshold: DateComponents(second: timeLimit)
+                threshold: DateComponents(second: 15)
             )
             
-            let activity = DeviceActivityName("MyApp.ScreenTime")
-            let eventName = DeviceActivityEvent.Name("MyApp.SomeEventName")
+            let activity = DeviceActivityName("Relief.ScreenTime")
+            let eventName = DeviceActivityEvent.Name("Relief.SomeEventName")
             let center = DeviceActivityCenter()
             center.stopMonitoring()
 
@@ -87,7 +113,7 @@ class ViewController: UIViewController {
                 )
                 
                 model.isMonitoringActive = true
-                monitor = MyMonitorExtension(notificationManager: notificationManager)
+//                monitor = MyMonitorExtension(notificationManager: notificationManager)
                 print("Monitoramento iniciado.")
             } catch {
                 print("Error starting monitoring: \(error)")
@@ -98,7 +124,7 @@ class ViewController: UIViewController {
     func stopMonitoring() {
         if model.isMonitoringActive {
             print("Monitoramento parado.")
-            let activityNames = [DeviceActivityName("MyApp.ScreenTime")]
+            let activityNames = [DeviceActivityName("Relief.ScreenTime")]
             do {
                 try center.stopMonitoring(activityNames)
                 model.isMonitoringActive = false
@@ -150,26 +176,31 @@ extension ViewController { // visualiza, salva e carrega
 
 
 
-class MyMonitorExtension: DeviceActivityMonitor {
-    let notificationManager: NotificationManager
-
-    init(notificationManager: NotificationManager) {
-        self.notificationManager = notificationManager
-        super.init()
-    }
-    
-    
-    override func eventDidReachThreshold(_ event: DeviceActivityEvent.Name, activity: DeviceActivityName) {
-        super.eventDidReachThreshold(event, activity: activity)
-        notificationManager.sendImmediateNotification(title: "Atenção", body: "Limite de tempo atingido para \(activity)")
-    }
-
-    override func eventWillReachThresholdWarning(_ event: DeviceActivityEvent.Name, activity: DeviceActivityName) {
-        super.eventWillReachThresholdWarning(event, activity: activity)
-        notificationManager.sendImmediateNotification(title: "Aviso", body: "Limite de tempo prestes a ser atingido para \(activity)")
-    }
-}
-
+//class MyMonitorExtension: DeviceActivityMonitor {
+//    let notificationManager: NotificationManager
+//
+//    init(notificationManager: NotificationManager) {
+//        self.notificationManager = notificationManager
+//        super.init()
+//        self.notificationManager.sendImmediateNotification(title: "dasdsadsadsa", body: "dasdsaas")
+//    }
+//    
+//    
+//    override func eventDidReachThreshold(_ event: DeviceActivityEvent.Name, activity: DeviceActivityName) {
+//        super.eventDidReachThreshold(event, activity: activity)
+//        print("auiee")
+//        print("Aviso: Threshold tingido para atividade: \(activity)")
+//        notificationManager.sendImmediateNotification(title: "Atenção", body: "Limite de tempo atingido para \(activity)")
+//    }
+//
+//    override func eventWillReachThresholdWarning(_ event: DeviceActivityEvent.Name, activity: DeviceActivityName) {
+//        super.eventWillReachThresholdWarning(event, activity: activity)
+//        print("auiee")
+//        print("Aviso: Threshold prestes a ser atingido para atividade: \(activity)")
+//        notificationManager.sendImmediateNotification(title: "Aviso", body: "Limite de tempo prestes a ser atingido para \(activity)")
+//    }
+//}
+// 
 //extension ViewController: MyMonitorDelegate {
 //    func didUseApp() {
 //        print("O aplicativo foi utilizado por mais 10 segundos.")
