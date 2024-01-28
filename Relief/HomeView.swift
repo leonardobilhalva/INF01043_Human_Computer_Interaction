@@ -10,13 +10,14 @@ struct HomeView: View {
     @StateObject private var notificationManager = NotificationManager()
     @StateObject private var monitorManager = MonitorManager()
     var viewController: ViewController?
+//    private var monitor: MyMonitorExtension?
 
-    
+        
     
     @State private var isMonitoringActive = false
 
     var body: some View {
-        NavigationView {
+//        NavigationView {
             VStack {
                 Spacer().frame(height: 30)
                 
@@ -37,6 +38,13 @@ struct HomeView: View {
                         .overlay(Circle().stroke(Color.white, lineWidth: 2))
                         .shadow(color: .gray, radius: 10, x: 0, y: 0)
                         .padding()
+                }
+                
+                Button("leo")
+                {        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                    
+                    notificationManager.scheduleTestNotification()
+                }
                 }
 
                 NavigationLink(destination: SettingsView().environmentObject(notificationManager)) {
@@ -64,7 +72,8 @@ struct HomeView: View {
             .navigationBarBackButtonHidden(true)
             .background(Color(red: 213/255.0, green: 245/255.0, blue: 245/255.0))
             .edgesIgnoringSafeArea(.all)
-        }
+        
+        VStack{}
         .onAppear {
             self.notificationManager.requestAuthorization()
             
@@ -75,11 +84,11 @@ struct HomeView: View {
                     try await ac.requestAuthorization(for: .individual)
                 }
                 catch {
-                    // Some error occurred
                 }
             }
             
         }
+//        }
     }
 }
 
@@ -114,16 +123,6 @@ struct SettingsView: View {
 
     var body: some View {
         Text("Settings View")
-            .navigationBarBackButtonHidden(true)
-    }
-}
-
-struct StatisticsView: View {
-    @EnvironmentObject var notificationManager: NotificationManager
-
-    var body: some View {
-        Text("Statistics View")
-            .navigationBarBackButtonHidden(true)
     }
 }
 
@@ -132,6 +131,5 @@ struct ForumView: View {
 
     var body: some View {
         Text("Forum View")
-            .navigationBarBackButtonHidden(true)
     }
 }

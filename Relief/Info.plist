@@ -7,9 +7,15 @@
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
-		<string>nearby-interaction</string>
 		<string>processing</string>
 		<string>remote-notification</string>
 	</array>
+	<key>NSExtension</key>
+	<dict>
+		<key>NSExtensionPointIdentifier</key>
+		<string>com.apple.deviceactivity.monitor-extension</string>
+		<key>NSExtensionPrincipalClass</key>
+		<string>$(PRODUCT_MODULE_NAME).DeviceActivityMonitorExtension</string>
+	</dict>
 </dict>
 </plist>

@@ -7,16 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B32D103D2B6627A300A94145 /* DeviceActivityMonitorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D7CCD22B6357730034E72F /* DeviceActivityMonitorExtension.swift */; };
 		B33C4C342B5DD2160042F914 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33C4C332B5DD2160042F914 /* Notification.swift */; };
 		B33C4C362B5DDD1C0042F914 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33C4C352B5DDD1C0042F914 /* AppDelegate.swift */; };
-		B390B4272B34698A00EA0A1C /* Monitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B390B4262B34698A00EA0A1C /* Monitor.swift */; };
 		B3D190102B3463A0009610FA /* ReliefApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D1900F2B3463A0009610FA /* ReliefApp.swift */; };
 		B3D190142B3463A1009610FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3D190132B3463A1009610FA /* Assets.xcassets */; };
 		B3D190172B3463A1009610FA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3D190162B3463A1009610FA /* Preview Assets.xcassets */; };
 		B3D190212B3463A1009610FA /* ReliefTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D190202B3463A1009610FA /* ReliefTests.swift */; };
 		B3D1902B2B3463A1009610FA /* ReliefUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D1902A2B3463A1009610FA /* ReliefUITests.swift */; };
 		B3D1902D2B3463A1009610FA /* ReliefUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D1902C2B3463A1009610FA /* ReliefUITestsLaunchTests.swift */; };
+		B3D7CCD02B6357730034E72F /* DeviceActivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3D7CCCF2B6357730034E72F /* DeviceActivity.framework */; };
+		B3D7CCD82B6357730034E72F /* Monitor.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B3D7CCCD2B6357730034E72F /* Monitor.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B3D7CCDE2B6357B90034E72F /* Monitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B390B4262B34698A00EA0A1C /* Monitor.swift */; };
 		B3E63E602B4D0AF90014C6E7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E63E5F2B4D0AF90014C6E7 /* SettingsView.swift */; };
+		B3EE9FE82B66F9210086CB44 /* StatisticsVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3EE9FE72B66F9210086CB44 /* StatisticsVIew.swift */; };
 		B3EF81BF2B4CBB0E007C1B71 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3EF81BE2B4CBB0E007C1B71 /* HomeView.swift */; };
 		B3EF81CB2B4CDEDA007C1B71 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3EF81CA2B4CDEDA007C1B71 /* LoginView.swift */; };
 		B3EF81CD2B4CDFA8007C1B71 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3EF81CC2B4CDFA8007C1B71 /* SignUpView.swift */; };
@@ -37,7 +41,28 @@
 			remoteGlobalIDString = B3D1900B2B3463A0009610FA;
 			remoteInfo = Relief;
 		};
+		B3D7CCD62B6357730034E72F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B3D190042B3463A0009610FA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B3D7CCCC2B6357730034E72F;
+			remoteInfo = Monitor;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B3D7CCD92B6357730034E72F /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				B3D7CCD82B6357730034E72F /* Monitor.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		B33C4C332B5DD2160042F914 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
@@ -53,8 +78,14 @@
 		B3D190262B3463A1009610FA /* ReliefUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReliefUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3D1902A2B3463A1009610FA /* ReliefUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReliefUITests.swift; sourceTree = "<group>"; };
 		B3D1902C2B3463A1009610FA /* ReliefUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReliefUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		B3D7CCCD2B6357730034E72F /* Monitor.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Monitor.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3D7CCCF2B6357730034E72F /* DeviceActivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DeviceActivity.framework; path = System/Library/Frameworks/DeviceActivity.framework; sourceTree = SDKROOT; };
+		B3D7CCD22B6357730034E72F /* DeviceActivityMonitorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceActivityMonitorExtension.swift; sourceTree = "<group>"; };
+		B3D7CCD42B6357730034E72F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B3D7CCD52B6357730034E72F /* Monitor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Monitor.entitlements; sourceTree = "<group>"; };
 		B3E63E5D2B4D030B0014C6E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B3E63E5F2B4D0AF90014C6E7 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		B3EE9FE72B66F9210086CB44 /* StatisticsVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsVIew.swift; sourceTree = "<group>"; };
 		B3EF81BE2B4CBB0E007C1B71 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		B3EF81CA2B4CDEDA007C1B71 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		B3EF81CC2B4CDFA8007C1B71 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -82,6 +113,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B3D7CCCA2B6357730034E72F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B3D7CCD02B6357730034E72F /* DeviceActivity.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -91,6 +130,8 @@
 				B3D1900E2B3463A0009610FA /* Relief */,
 				B3D1901F2B3463A1009610FA /* ReliefTests */,
 				B3D190292B3463A1009610FA /* ReliefUITests */,
+				B3D7CCD12B6357730034E72F /* Monitor */,
+				B3D7CCCE2B6357730034E72F /* Frameworks */,
 				B3D1900D2B3463A0009610FA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -101,6 +142,7 @@
 				B3D1900C2B3463A0009610FA /* Relief.app */,
 				B3D1901C2B3463A1009610FA /* ReliefTests.xctest */,
 				B3D190262B3463A1009610FA /* ReliefUITests.xctest */,
+				B3D7CCCD2B6357730034E72F /* Monitor.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -149,6 +191,24 @@
 			path = ReliefUITests;
 			sourceTree = "<group>";
 		};
+		B3D7CCCE2B6357730034E72F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B3D7CCCF2B6357730034E72F /* DeviceActivity.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B3D7CCD12B6357730034E72F /* Monitor */ = {
+			isa = PBXGroup;
+			children = (
+				B3D7CCD42B6357730034E72F /* Info.plist */,
+				B3D7CCD52B6357730034E72F /* Monitor.entitlements */,
+				B3D7CCD22B6357730034E72F /* DeviceActivityMonitorExtension.swift */,
+			);
+			path = Monitor;
+			sourceTree = "<group>";
+		};
 		B3EF81BC2B4CBABF007C1B71 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -161,6 +221,7 @@
 		B3EF81BD2B4CBACB007C1B71 /* Statistics */ = {
 			isa = PBXGroup;
 			children = (
+				B3EE9FE72B66F9210086CB44 /* StatisticsVIew.swift */,
 			);
 			path = Statistics;
 			sourceTree = "<group>";
@@ -168,8 +229,8 @@
 		B3EF81C02B4CBB1B007C1B71 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				B33C4C352B5DDD1C0042F914 /* AppDelegate.swift */,
 				B390B4262B34698A00EA0A1C /* Monitor.swift */,
+				B33C4C352B5DDD1C0042F914 /* AppDelegate.swift */,
 				B33C4C332B5DD2160042F914 /* Notification.swift */,
 			);
 			path = Core;
@@ -207,10 +268,12 @@
 				B3D190082B3463A0009610FA /* Sources */,
 				B3D190092B3463A0009610FA /* Frameworks */,
 				B3D1900A2B3463A0009610FA /* Resources */,
+				B3D7CCD92B6357730034E72F /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				B3D7CCD72B6357730034E72F /* PBXTargetDependency */,
 			);
 			name = Relief;
 			productName = Relief;
@@ -253,6 +316,23 @@
 			productReference = B3D190262B3463A1009610FA /* ReliefUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		B3D7CCCC2B6357730034E72F /* Monitor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B3D7CCDC2B6357730034E72F /* Build configuration list for PBXNativeTarget "Monitor" */;
+			buildPhases = (
+				B3D7CCC92B6357730034E72F /* Sources */,
+				B3D7CCCA2B6357730034E72F /* Frameworks */,
+				B3D7CCCB2B6357730034E72F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Monitor;
+			productName = Monitor;
+			productReference = B3D7CCCD2B6357730034E72F /* Monitor.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -274,6 +354,9 @@
 						CreatedOnToolsVersion = 15.1;
 						TestTargetID = B3D1900B2B3463A0009610FA;
 					};
+					B3D7CCCC2B6357730034E72F = {
+						CreatedOnToolsVersion = 15.1;
+					};
 				};
 			};
 			buildConfigurationList = B3D190072B3463A0009610FA /* Build configuration list for PBXProject "Relief" */;
@@ -292,6 +375,7 @@
 				B3D1900B2B3463A0009610FA /* Relief */,
 				B3D1901B2B3463A1009610FA /* ReliefTests */,
 				B3D190252B3463A1009610FA /* ReliefUITests */,
+				B3D7CCCC2B6357730034E72F /* Monitor */,
 			);
 		};
 /* End PBXProject section */
@@ -320,6 +404,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B3D7CCCB2B6357730034E72F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -327,14 +418,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3D7CCDE2B6357B90034E72F /* Monitor.swift in Sources */,
 				B33C4C362B5DDD1C0042F914 /* AppDelegate.swift in Sources */,
 				B3EF81BF2B4CBB0E007C1B71 /* HomeView.swift in Sources */,
 				B3EF81CD2B4CDFA8007C1B71 /* SignUpView.swift in Sources */,
-				B390B4272B34698A00EA0A1C /* Monitor.swift in Sources */,
 				B33C4C342B5DD2160042F914 /* Notification.swift in Sources */,
 				B3E63E602B4D0AF90014C6E7 /* SettingsView.swift in Sources */,
 				B3EF81CB2B4CDEDA007C1B71 /* LoginView.swift in Sources */,
 				B3D190102B3463A0009610FA /* ReliefApp.swift in Sources */,
+				B3EE9FE82B66F9210086CB44 /* StatisticsVIew.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,6 +447,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B3D7CCC92B6357730034E72F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B32D103D2B6627A300A94145 /* DeviceActivityMonitorExtension.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -367,6 +467,11 @@
 			isa = PBXTargetDependency;
 			target = B3D1900B2B3463A0009610FA /* Relief */;
 			targetProxy = B3D190272B3463A1009610FA /* PBXContainerItemProxy */;
+		};
+		B3D7CCD72B6357730034E72F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B3D7CCCC2B6357730034E72F /* Monitor */;
+			targetProxy = B3D7CCD62B6357730034E72F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -493,6 +598,7 @@
 		B3D190312B3463A1009610FA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = /Users/leo/coding/ufrgs/interacao_homem_computador/Relief/Relief/Relief.entitlements;
@@ -527,6 +633,7 @@
 		B3D190322B3463A1009610FA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = /Users/leo/coding/ufrgs/interacao_homem_computador/Relief/Relief/Relief.entitlements;
@@ -634,6 +741,60 @@
 			};
 			name = Release;
 		};
+		B3D7CCDA2B6357730034E72F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Monitor/Monitor.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = M8UAM9N3HT;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Monitor/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Monitor;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.leonardobilhalva.Relief.Monitor;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B3D7CCDB2B6357730034E72F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Monitor/Monitor.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = M8UAM9N3HT;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Monitor/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Monitor;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.leonardobilhalva.Relief.Monitor;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -669,6 +830,15 @@
 			buildConfigurations = (
 				B3D190372B3463A1009610FA /* Debug */,
 				B3D190382B3463A1009610FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B3D7CCDC2B6357730034E72F /* Build configuration list for PBXNativeTarget "Monitor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B3D7CCDA2B6357730034E72F /* Debug */,
+				B3D7CCDB2B6357730034E72F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

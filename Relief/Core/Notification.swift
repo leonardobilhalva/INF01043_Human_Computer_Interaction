@@ -52,6 +52,25 @@ class NotificationManager: ObservableObject {
         }
     }
     
+    func scheduleTestNotification() {
+          let content = UNMutableNotificationContent()
+          content.title = "Teste de Notificação"
+          content.body = "Esta é uma notificação de teste para o modo segundo plano."
+          content.sound = UNNotificationSound.default
+
+          // Agendando a notificação para daqui a 15 segundos
+          let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+          let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+
+          UNUserNotificationCenter.current().add(request) { error in
+              if let error = error {
+                  print("Erro ao agendar notificação de teste: \(error.localizedDescription)")
+              } else {
+                  print("Notificação de teste agendada com sucesso")
+              }
+          }
+      }
+    
     func sendImmediateNotification(title: String, body: String) {
         let content = UNMutableNotificationContent()
         content.title = title

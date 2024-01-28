@@ -213,6 +213,7 @@ extension ViewController { // visualiza, salva e carrega
 
 class MonitorManager: ObservableObject {
     @Published var isMonitoringActive = false
+    
     var viewController: ViewController?
 
     func toggleMonitoring() {
