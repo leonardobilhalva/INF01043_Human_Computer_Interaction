@@ -21,41 +21,65 @@ struct ScreenTimeSelectAppsContentView: View {
     @ObservedObject var model: ScreenTimeSelectAppsModel
 
     var body: some View {
-        List {
-            Button("Selecione os aplicativos para monitorar") {
-                pickerIsPresented = true
-            }
-            .familyActivityPicker(
-                isPresented: $pickerIsPresented,
-                selection: $model.activitySelection
-            )
-            .onDisappear() {
-                print("apps selecionados: \(model.activitySelection.applicationTokens)")
-            }
+        
+         ScrollView {
+             VStack(spacing: 20) {
+                 // Cada 'CardView' é um botão com um visual de cartão
+                 CardView(title: "Selecione os aplicativos para monitorar", systemImageName: "app.badge") {
+                     pickerIsPresented = true
+                 }
+                 .familyActivityPicker(
+                     isPresented: $pickerIsPresented,
+                     selection: $model.activitySelection
+                 )
 
-            Section(header: Text("Tempo Permitido")) {
-                Button("Definir tempo permitido nos aplicativos selecionados") {
-                    isTimeLimitSheetPresented = true
-                }
-                .sheet(isPresented: $isTimeLimitSheetPresented) {
-                    TimeLimitView(timeLimit: $timeLimit)
-                }
-            }
+                 CardView(title: "Definir tempo permitido nos aplicativos selecionados", systemImageName: "clock") {
+                     isTimeLimitSheetPresented = true
+                 }
+                 .sheet(isPresented: $isTimeLimitSheetPresented) {
+                     TimeLimitView(timeLimit: $timeLimit)
+                 }
 
-            Section(header: Text("Dias e Horários de Monitoramento")) {
-                Button("Definir os dias e horários de monitoramento") {
-                    isDayPickerSheetPresented = true // Apenas atualiza a variável de estado para apresentar a sheet
-                }
-                .sheet(isPresented: $isDayPickerSheetPresented) { // Adiciona a sheet para apresentar a DayPickerView
-                    DayPickerView(activeDays: $activeDays)
-                }
-            }
-        }
-        .listStyle(GroupedListStyle())
-        .background(Color(red: 213/255.0, green: 245/255.0, blue: 245/255.0))
-        .navigationBarTitle("Configurações")
-    }
-}
+                 CardView(title: "Definir os dias e horários de monitoramento", systemImageName: "calendar") {
+                     isDayPickerSheetPresented = true
+                 }
+                 .sheet(isPresented: $isDayPickerSheetPresented) {
+                     DayPickerView(activeDays: $activeDays)
+                 }
+             }
+             .padding()
+         }
+         .background(Color(red: 213/255.0, green: 245/255.0, blue: 245/255.0).edgesIgnoringSafeArea(.all))
+         .navigationBarTitle("Configurações")
+     }
+ }
+
+ struct CardView: View {
+     let title: String
+     let systemImageName: String
+     var action: () -> Void
+
+     var body: some View {
+         Button(action: action) {
+             HStack {
+                 Image(systemName: systemImageName)
+                     .font(.headline)
+                     .foregroundColor(.blue)
+                 Text(title)
+                     .foregroundColor(.black)
+                 Spacer()
+                 Image(systemName: "chevron.right")
+                     .font(.caption)
+                     .foregroundColor(.gray)
+             }
+             .padding()
+             .background(Color.white)
+             .cornerRadius(12)
+             .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
+             .padding(.horizontal)
+         }
+     }
+ }
 
 struct TimeLimitView: View {
     @Environment(\.presentationMode) var presentationMode
@@ -74,7 +98,6 @@ struct TimeLimitView: View {
                     selection: Binding(get: {
                         self.timeLimitDate
                     }, set: { newValue in
-                        // Aqui usamos Calendar.current diretamente
                         self.timeLimit = newValue.timeIntervalSince(Calendar.current.startOfDay(for: Date()))
                     }),
                     displayedComponents: [.hourAndMinute]
@@ -100,7 +123,6 @@ struct TimeLimitView: View {
         if let savedTime = defaults.object(forKey: "timeLimit") as? TimeInterval {
             return savedTime
         }
-        // Valor padrão se nada estiver salvo, por exemplo, 1 hora (3600 segundos)
         return 3600
     }
 }
