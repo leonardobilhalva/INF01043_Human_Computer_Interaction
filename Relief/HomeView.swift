@@ -40,18 +40,18 @@ struct HomeView: View {
                         .padding()
                 }
                 
-                Button("leo")
-                {        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                    
-                    notificationManager.scheduleTestNotification()
-                }
-                }
+//                Button("leo")
+//                {        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+//                    
+//                    notificationManager.scheduleTestNotification()
+//                }
+//                }
 
-                NavigationLink(destination: SettingsView().environmentObject(notificationManager)) {
+                NavigationLink(destination: SettingsView().environmentObject(monitorManager).environmentObject(notificationManager)) {
                                     Text("Configurações")
                                 }
                                 .buttonStyle(MyButtonStyle())
-
+//
                 NavigationLink(destination: ViewControllerWrapper().environmentObject(monitorManager).environmentObject(notificationManager)) {
                                     Text("Teste")
                                 }
@@ -92,19 +92,6 @@ struct HomeView: View {
     }
 }
 
-struct ViewControllerWrapper: UIViewControllerRepresentable {
-    @EnvironmentObject var monitorManager: MonitorManager
-    @EnvironmentObject var notificationManager: NotificationManager
-
-    func makeUIViewController(context: Context) -> ViewController {
-        let viewController = ViewController(notificationManager: notificationManager)
-        monitorManager.viewController = viewController
-        return viewController
-    }
-
-    func updateUIViewController(_ uiViewController: ViewController, context: Context) {
-    }
-}
 
 struct MyButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
@@ -114,14 +101,5 @@ struct MyButtonStyle: ButtonStyle {
             .foregroundColor(.white)
             .cornerRadius(10)
             .padding(.horizontal)
-    }
-}
-
-
-struct SettingsView: View {
-    @EnvironmentObject var notificationManager: NotificationManager
-
-    var body: some View {
-        Text("Settings View")
     }
 }

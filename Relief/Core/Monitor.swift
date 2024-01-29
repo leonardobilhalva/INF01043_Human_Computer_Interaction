@@ -1,3 +1,4 @@
+
 import UIKit
 import SwiftUI
 import DeviceActivity
@@ -29,6 +30,12 @@ struct ScreenTimeSelectAppsContentView: View {
         .onDisappear(){
             print("leonardo:  \($model.activitySelection.applicationTokens)")
         }
+        
+        
+        
+        
+        
+        
     }
 }
 
@@ -95,7 +102,7 @@ class ViewController: UIViewController {
                 applications: selection.applicationTokens,
                 categories: selection.categoryTokens,
                 webDomains: selection.webDomainTokens,
-                threshold: DateComponents(second: 15)
+                threshold: DateComponents(second: 5)
             )
             
             let activity = DeviceActivityName("Relief.ScreenTime")
@@ -173,44 +180,6 @@ extension ViewController { // visualiza, salva e carrega
        }
 }
 
-
-
-
-//class MyMonitorExtension: DeviceActivityMonitor {
-//    let notificationManager: NotificationManager
-//
-//    init(notificationManager: NotificationManager) {
-//        self.notificationManager = notificationManager
-//        super.init()
-//        self.notificationManager.sendImmediateNotification(title: "dasdsadsadsa", body: "dasdsaas")
-//    }
-//    
-//    
-//    override func eventDidReachThreshold(_ event: DeviceActivityEvent.Name, activity: DeviceActivityName) {
-//        super.eventDidReachThreshold(event, activity: activity)
-//        print("auiee")
-//        print("Aviso: Threshold tingido para atividade: \(activity)")
-//        notificationManager.sendImmediateNotification(title: "Atenção", body: "Limite de tempo atingido para \(activity)")
-//    }
-//
-//    override func eventWillReachThresholdWarning(_ event: DeviceActivityEvent.Name, activity: DeviceActivityName) {
-//        super.eventWillReachThresholdWarning(event, activity: activity)
-//        print("auiee")
-//        print("Aviso: Threshold prestes a ser atingido para atividade: \(activity)")
-//        notificationManager.sendImmediateNotification(title: "Aviso", body: "Limite de tempo prestes a ser atingido para \(activity)")
-//    }
-//}
-// 
-//extension ViewController: MyMonitorDelegate {
-//    func didUseApp() {
-//        print("O aplicativo foi utilizado por mais 10 segundos.")
-//    }
-//}
-//
-//protocol MyMonitorDelegate: AnyObject {
-//    func didUseApp()
-//}
-
 class MonitorManager: ObservableObject {
     @Published var isMonitoringActive = false
     
@@ -225,5 +194,3 @@ class MonitorManager: ObservableObject {
         }
     }
 }
-
-
