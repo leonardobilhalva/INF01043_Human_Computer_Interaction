@@ -21,6 +21,7 @@
 		B3D7CCDE2B6357B90034E72F /* Monitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B390B4262B34698A00EA0A1C /* Monitor.swift */; };
 		B3E63E602B4D0AF90014C6E7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E63E5F2B4D0AF90014C6E7 /* SettingsView.swift */; };
 		B3EE9FE82B66F9210086CB44 /* StatisticsVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3EE9FE72B66F9210086CB44 /* StatisticsVIew.swift */; };
+		B3EE9FF02B67268C0086CB44 /* ForumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3EE9FEF2B67268C0086CB44 /* ForumView.swift */; };
 		B3EF81BF2B4CBB0E007C1B71 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3EF81BE2B4CBB0E007C1B71 /* HomeView.swift */; };
 		B3EF81CB2B4CDEDA007C1B71 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3EF81CA2B4CDEDA007C1B71 /* LoginView.swift */; };
 		B3EF81CD2B4CDFA8007C1B71 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3EF81CC2B4CDFA8007C1B71 /* SignUpView.swift */; };
@@ -86,6 +87,7 @@
 		B3E63E5D2B4D030B0014C6E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B3E63E5F2B4D0AF90014C6E7 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		B3EE9FE72B66F9210086CB44 /* StatisticsVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsVIew.swift; sourceTree = "<group>"; };
+		B3EE9FEF2B67268C0086CB44 /* ForumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumView.swift; sourceTree = "<group>"; };
 		B3EF81BE2B4CBB0E007C1B71 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		B3EF81CA2B4CDEDA007C1B71 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		B3EF81CC2B4CDFA8007C1B71 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 		B3EF81C22B4CBB5F007C1B71 /* Forum */ = {
 			isa = PBXGroup;
 			children = (
+				B3EE9FEF2B67268C0086CB44 /* ForumView.swift */,
 			);
 			path = Forum;
 			sourceTree = "<group>";
@@ -422,6 +425,7 @@
 				B33C4C362B5DDD1C0042F914 /* AppDelegate.swift in Sources */,
 				B3EF81BF2B4CBB0E007C1B71 /* HomeView.swift in Sources */,
 				B3EF81CD2B4CDFA8007C1B71 /* SignUpView.swift in Sources */,
+				B3EE9FF02B67268C0086CB44 /* ForumView.swift in Sources */,
 				B33C4C342B5DD2160042F914 /* Notification.swift in Sources */,
 				B3E63E602B4D0AF90014C6E7 /* SettingsView.swift in Sources */,
 				B3EF81CB2B4CDEDA007C1B71 /* LoginView.swift in Sources */,

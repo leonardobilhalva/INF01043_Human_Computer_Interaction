@@ -125,11 +125,3 @@ struct SettingsView: View {
         Text("Settings View")
     }
 }
-
-struct ForumView: View {
-    @EnvironmentObject var notificationManager: NotificationManager
-
-    var body: some View {
-        Text("Forum View")
-    }
-}
