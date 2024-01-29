@@ -47,13 +47,13 @@ struct HomeView: View {
 //                }
 //                }
 
-                NavigationLink(destination: SettingsView().environmentObject(monitorManager).environmentObject(notificationManager)) {
-                                    Text("Configurações")
-                                }
-                                .buttonStyle(MyButtonStyle())
+//                NavigationLink(destination: SettingsView().environmentObject(monitorManager).environmentObject(notificationManager)) {
+//                                    Text("Configurações")
+//                                }
+//                                .buttonStyle(MyButtonStyle())
 //
                 NavigationLink(destination: ViewControllerWrapper().environmentObject(monitorManager).environmentObject(notificationManager)) {
-                                    Text("Teste")
+                                    Text("Configurações")
                                 }
                                 .buttonStyle(MyButtonStyle())
 

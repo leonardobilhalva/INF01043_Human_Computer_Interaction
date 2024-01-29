@@ -13,32 +13,6 @@ class ScreenTimeSelectAppsModel: ObservableObject {
     init() { }
 }
 
-struct ScreenTimeSelectAppsContentView: View {
-    @State private var pickerIsPresented = false
-    @ObservedObject var model: ScreenTimeSelectAppsModel
-
-    var body: some View {
-        Button {
-            pickerIsPresented = true
-        } label: {
-            Text("Select Apps")
-        }
-        .familyActivityPicker(
-            isPresented: $pickerIsPresented,
-            selection: $model.activitySelection
-        )
-        .onDisappear(){
-            print("leonardo:  \($model.activitySelection.applicationTokens)")
-        }
-        
-        
-        
-        
-        
-        
-    }
-}
-
 class ViewController: UIViewController {
     var notificationManager: NotificationManager
     private let model = ScreenTimeSelectAppsModel()
